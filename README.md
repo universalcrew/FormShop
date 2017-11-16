@@ -9,7 +9,10 @@
 
 Для работы требуется [EconomyAPI](https://github.com/onebone/EconomyS) и [FormAPI](https://github.com/jojoe77777/FormAPI)
 
-***
-Список задач:
+#### Команды
+
+`/shop` открыть магазин
+
+#### Список задач:
 
 + Добавить поддержку английского языка.
