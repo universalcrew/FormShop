@@ -1,6 +1,6 @@
 name: FormShop
-main: ru\universalcrew\Home
-version: 1.0.0
+main: ru\universalcrew\formshop\Home
+version: 1.0.1
 api:
 - 1.0.0
 - 2.0.0

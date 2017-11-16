@@ -1,6 +1,6 @@
 <?php
 
-namespace ru\universalcrew;
+namespace ru\universalcrew\formshop;
 
 /**
  *  _    _       _                          _  ____
@@ -17,17 +17,36 @@ namespace ru\universalcrew;
 use jojoe77777\FormAPI\FormAPI;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
-use ru\universalcrew\commands\ShopCommand;
-use ru\universalcrew\utils\Forms;
-use ru\universalcrew\utils\Pay;
-use ru\universalcrew\utils\Provider;
+use ru\universalcrew\formshop\commands\ShopCommand;
+use ru\universalcrew\formshop\utils\Forms;
+use ru\universalcrew\formshop\utils\Pay;
+use ru\universalcrew\formshop\utils\Provider;
 
 class Home extends PluginBase
 {
+    /**
+     * @var
+     */
     private $economyapi;
+
+    /**
+     * @var
+     */
     private $formapi;
+
+    /**
+     * @var
+     */
     private $provider;
+
+    /**
+     * @var
+     */
     private $pay;
+
+    /**
+     * @var
+     */
     private $forms;
 
     function onEnable()

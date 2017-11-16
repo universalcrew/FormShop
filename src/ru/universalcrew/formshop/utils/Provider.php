@@ -1,6 +1,6 @@
 <?php
 
-namespace ru\universalcrew\utils;
+namespace ru\universalcrew\formshop\utils;
 
 /**
  *  _    _       _                          _  ____
@@ -15,7 +15,7 @@ namespace ru\universalcrew\utils;
  */
 
 use pocketmine\utils\Config;
-use ru\universalcrew\Home;
+use ru\universalcrew\formshop\Home;
 
 class Provider
 {
@@ -28,6 +28,11 @@ class Provider
      * @var Config
      */
     private $messages;
+
+    /**
+     * @var Home
+     */
+    private $home;
 
     /**
      * Provider constructor.
@@ -92,7 +97,6 @@ class Provider
         return isset($this->getShops()->getAll()[$category]["items"]);
     }
 
-
     /**
      * @param string $category
      * @return array
@@ -103,6 +107,11 @@ class Provider
         else return [];
     }
 
+    /**
+     * @param string $category
+     * @param int $index
+     * @return string
+     */
     function getStringItem(string $category, int $index) : string
     {
         return $this->getCategotyItems($category)[$index];

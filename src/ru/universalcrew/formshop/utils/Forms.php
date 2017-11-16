@@ -1,6 +1,6 @@
 <?php
 
-namespace ru\universalcrew\utils;
+namespace ru\universalcrew\formshop\utils;
 
 /**
  *  _    _       _                          _  ____
@@ -16,10 +16,13 @@ namespace ru\universalcrew\utils;
 
 use pocketmine\item\Item;
 use pocketmine\Player;
-use ru\universalcrew\Home;
+use ru\universalcrew\formshop\Home;
 
 class Forms
 {
+    /**
+     * @var Home
+     */
     private $home;
 
     /**
@@ -93,6 +96,11 @@ class Forms
         }
     }
 
+    /**
+     * @param string $category
+     * @param int $index
+     * @param Player $player
+     */
     private function selectCountItem(string $category, int $index, Player $player)
     {
         if ($player instanceof Player) {
@@ -117,6 +125,11 @@ class Forms
         }
     }
 
+    /**
+     * @param Player $player
+     * @param array $data
+     * @param string $string_item
+     */
     private function buyForm(Player $player, array $data, string $string_item)
     {
         if ($player instanceof Player) {

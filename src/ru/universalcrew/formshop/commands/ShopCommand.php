@@ -1,6 +1,6 @@
 <?php
 
-namespace ru\universalcrew\commands;
+namespace ru\universalcrew\formshop\commands;
 
 /**
  *  _    _       _                          _  ____
@@ -19,13 +19,19 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
-use ru\universalcrew\Home;
+use ru\universalcrew\formshop\Home;
 
 class ShopCommand extends Command implements PluginIdentifiableCommand
 {
-
+    /**
+     * @var Home
+     */
     private $home;
 
+    /**
+     * ShopCommand constructor.
+     * @param Home $home
+     */
     public function __construct(Home $home)
     {
         parent::__construct("shop", "Магазин", "shop", []);
@@ -45,11 +51,17 @@ class ShopCommand extends Command implements PluginIdentifiableCommand
         return;
     }
 
+    /**
+     * @return Plugin
+     */
     function getPlugin(): Plugin
     {
         return $this->home;
     }
 
+    /**
+     * @return Home
+     */
     function getHome(): Home
     {
         return $this->home;

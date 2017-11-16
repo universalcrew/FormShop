@@ -1,6 +1,6 @@
 <?php
 
-namespace ru\universalcrew\utils;
+namespace ru\universalcrew\formshop\utils;
 
 /**
  *  _    _       _                          _  ____
@@ -16,10 +16,14 @@ namespace ru\universalcrew\utils;
 
 use pocketmine\item\Item;
 use pocketmine\Player;
-use ru\universalcrew\Home;
+use ru\universalcrew\formshop\Home;
 
 class Pay
 {
+    /**
+     * @var Home
+     */
+    private $home;
 
     /**
      * Pay constructor.
