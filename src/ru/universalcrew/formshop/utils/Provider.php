@@ -41,7 +41,8 @@ class Provider
     function __construct(Home $home)
     {
         $this->home = $home;
-        if (!is_file($this->getHome()->getDataFolder() . 'shops.yml') && !is_file($this->getHome()->getDataFolder() . 'messages.yml')) {
+        if (!is_file($this->getHome()->getDataFolder() . 'shops.yml') &&
+            !is_file($this->getHome()->getDataFolder() . 'messages.yml')) {
             @mkdir($this->getHome()->getDataFolder());
             $this->getHome()->saveResource('shops.yml');
             $this->getHome()->saveResource('messages.yml');
@@ -50,6 +51,15 @@ class Provider
         $this->shops->reload();
         $this->messages = new Config($this->getHome()->getDataFolder() . 'messages.yml', Config::YAML, []);
         $this->messages->reload();
+    }
+
+    /**
+     * @param string $message
+     * @return string
+     */
+    function getMessage(string $message)
+    {
+        return $this->messages->get($message);
     }
 
     /**

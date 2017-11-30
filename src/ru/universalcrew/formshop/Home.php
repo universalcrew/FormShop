@@ -25,33 +25,33 @@ use ru\universalcrew\formshop\utils\Provider;
 class Home extends PluginBase
 {
     /**
-     * @var
+     * @var EconomyAPI
      */
     private $economyapi;
 
     /**
-     * @var
+     * @var FormAPI
      */
     private $formapi;
 
     /**
-     * @var
+     * @var Provider
      */
     private $provider;
 
     /**
-     * @var
+     * @var Pay
      */
     private $pay;
 
     /**
-     * @var
+     * @var Forms
      */
     private $forms;
 
     function onEnable()
     {
-        $this->getLogger()->info("FormShop включен.");
+        $this->getLogger()->info($this->getDescription()->getName() . " включен.");
         $this->loadPlugins();
         $this->loadClass();
         $this->initCommands();
@@ -64,9 +64,10 @@ class Home extends PluginBase
         $this->forms = new Forms($this);
     }
 
-    private function loadPlugins() : void
+    private function loadPlugins()
     {
-        if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") === null || $this->getServer()->getPluginManager()->getPlugin("FormAPI") === null) {
+        if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") === null ||
+            $this->getServer()->getPluginManager()->getPlugin("FormAPI") === null) {
             $this->getLogger()->critical('Дополнительные плагины не установлены. FormShop выключается...');
             $this->getServer()->getPluginManager()->disablePlugin($this);
         } else {
@@ -80,13 +81,13 @@ class Home extends PluginBase
         $list = [
             new ShopCommand($this)
         ];
-        foreach ($list as $class) $this->getServer()->getCommandMap()->register("FormShop", $class);
+        foreach ($list as $class) $this->getServer()->getCommandMap()->register($this->getDescription()->getName(), $class);
     }
 
     /**
      * @return Home
      */
-    function getHome() : Home
+    function getHome()
     {
         return $this;
     }
@@ -94,7 +95,7 @@ class Home extends PluginBase
     /**
      * @return EconomyAPI
      */
-    function getEconomy() : EconomyAPI
+    function getEconomy()
     {
         return $this->economyapi;
     }
@@ -102,7 +103,7 @@ class Home extends PluginBase
     /**
      * @return FormAPI
      */
-    function getForm(): FormAPI
+    function getForm()
     {
         return $this->formapi;
     }
@@ -110,7 +111,7 @@ class Home extends PluginBase
     /**
      * @return Provider
      */
-    function getProvider() : Provider
+    function getProvider()
     {
         return $this->provider;
     }
@@ -118,7 +119,7 @@ class Home extends PluginBase
     /**
      * @return Pay
      */
-    function getPay() : Pay
+    function getPay()
     {
         return $this->pay;
     }
@@ -126,14 +127,14 @@ class Home extends PluginBase
     /**
      * @return Forms
      */
-    function getForms() : Forms
+    function getForms()
     {
         return $this->forms;
     }
 
     function onDisable()
     {
-        $this->getLogger()->info("FormShop выключен.");
+        $this->getLogger()->info($this->getDescription()->getName() . " выключен.");
     }
 
 }

@@ -48,17 +48,19 @@ class Pay
      * @param Player $player
      * @param int $fullprice
      * @param Item $item
+     * @param int $count
+     * @param string $itemname
      */
-    public function pay(Player $player, int $fullprice, Item $item, int $count)
+    public function pay(Player $player, int $fullprice, Item $item, int $count, string $itemname)
     {
         if ($player->getInventory()->canAddItem($item)) {
             $this->getHome()->getEconomy()->reduceMoney($player, $fullprice);
-            $text = $this->getHome()->getProvider()->getMessages()['pay'];
-            $text = str_replace("%item_name%", $item->getName(), $text);
+            $text = $this->getHome()->getProvider()->getMessage("pay");
+            $text = str_replace("%item_name%", $itemname, $text);
             $text = str_replace("%count%", $count, $text);
             $player->getInventory()->addItem(Item::get($item->getId(), $item->getDamage(), $count));
             $player->sendMessage($text);
-        } else $player->sendMessage($this->getHome()->getProvider()->getMessages()['full_inventory']);
+        } else $player->sendMessage($this->getHome()->getProvider()->getMessage("full_inventory"));
     }
 
     /**

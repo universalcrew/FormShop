@@ -35,6 +35,7 @@ class ShopCommand extends Command implements PluginIdentifiableCommand
     public function __construct(Home $home)
     {
         parent::__construct("shop", "Магазин", "shop", []);
+        $this->setPermission("ru.universalcrew.formshop.shop");
         $this->home = $home;
     }
 
@@ -47,8 +48,13 @@ class ShopCommand extends Command implements PluginIdentifiableCommand
      */
     function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if ($sender instanceof Player) $this->getHome()->getForms()->mainShopForm($sender);
-        return;
+        if (!$sender instanceof Player) return false;
+        if (!$this->testPermissionSilent($sender)) {
+            $sender->sendMessage($this->getHome()->getProvider()->getMessage("no_permission"));
+            return false;
+        }
+        $this->getHome()->getForms()->mainShopForm($sender);
+        return true;
     }
 
     /**

@@ -1,21 +1,67 @@
-mainform:
-  title: "Добро пожаловать в магазин"
-  content: "Ваш баланс: %money%."
-  category_button: "%category_name%"
-itemsform:
-  title: "Добро пожаловать в магазин"
-  content: "Ваш баланс: %money%."
-  item_button: "%item_name% %id%:%damage% (%price%)"
-  no_content: "Категория пуста"
-selectcountform:
-  title: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%."
-  slider_name: "Выберите количество"
-buyform:
-  title: "Подтвердить покупку"
-  content: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%. Количество: %count%. Сумма покупки: %fullprice%"
-  no_money: "Недостаточно денег. Вам нужно: %fullprice%"
-  buy_button: "Купить"
+# ГЛАВНАЯ ФОРМА
+# MAIN FORM
+#
+# Заголовок
+# Title
+mainform.title: "Добро пожаловать в магазин"
+# Контент
+# Content
+mainform.content: "Ваш баланс: %money%."
+# Кнопка
+# Button
+mainform.button: "%category_name%"
 
+# ФОРМА С ПРЕДМЕТАМИ
+# ITEMS FORM
+#
+# Заголовок
+# Title
+itemsform.title: "Добро пожаловать в магазин"
+# Контент
+# Content
+itemsform.content: "Ваш баланс: %money%."
+# Кнопка
+# Button
+itemsform.button: "%item_name% %id%:%damage% (%price%)"
+# Список предметов пуст
+# The list of items is empty
+itemsform.no_content: "Категория пуста"
+
+# ФОРМА С ВЫБОРОМ КОЛИЧЕСТВА ПРЕДМЕТОВ
+# SELECT COUNT ITEMS FORM
+#
+# Заголовок
+# Title
+selectcountform.title: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%."
+# Слайдер
+# Slider
+selectcountform.slider_name: "Выберите количество"
+
+# ФОРМА ПОКУПКИ
+# BUY FORM
+#
+# Заголовок
+# Title
+buyform.title: "Подтвердить покупку"
+# Контент
+# Content
+buyform.content: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%. Количество: %count%. Сумма покупки: %fullprice%"
+# Кнопка
+# Button
+buyform.button: "Купить"
+# Недостаточно денег
+# Not enough money
+buyform.no_money: "Недостаточно денег. Вам нужно: %fullprice%"
+
+# Полный инвентарь
+# Full inventory
 full_inventory: "Недостаточно места в инвентаре"
+# Успешная покупка
+# Successful purchase
 pay: "Вы успешно приобрели %count% %item_name%"
+# Кнопка, для возвращения в основную форму
+# Button, to return to the main form
 mainformreturn: "Вернуться в главное меню"
+# Недостаточно прав
+# No permission
+no_permission: "Недостаточно прав"
