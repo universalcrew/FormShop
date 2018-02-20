@@ -87,7 +87,7 @@ class Home extends PluginBase
     /**
      * @return Home
      */
-    function getHome()
+    function getHome() : Home
     {
         return $this;
     }
@@ -95,7 +95,7 @@ class Home extends PluginBase
     /**
      * @return EconomyAPI
      */
-    function getEconomy()
+    function getEconomy() : EconomyAPI
     {
         return $this->economyapi;
     }
@@ -103,7 +103,7 @@ class Home extends PluginBase
     /**
      * @return FormAPI
      */
-    function getForm()
+    function getForm() : FormAPI
     {
         return $this->formapi;
     }
@@ -111,7 +111,7 @@ class Home extends PluginBase
     /**
      * @return Provider
      */
-    function getProvider()
+    function getProvider() : Provider
     {
         return $this->provider;
     }
@@ -119,7 +119,7 @@ class Home extends PluginBase
     /**
      * @return Pay
      */
-    function getPay()
+    function getPay() : Pay
     {
         return $this->pay;
     }
@@ -127,7 +127,7 @@ class Home extends PluginBase
     /**
      * @return Forms
      */
-    function getForms()
+    function getForms() : Forms
     {
         return $this->forms;
     }

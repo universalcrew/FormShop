@@ -40,9 +40,9 @@ class Forms
     function mainShopForm(Player $player)
     {
         $money = $this->getHome()->getEconomy()->myMoney($player);
-        $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, array $data) {
-            if (!($data[0] === null )) {
-                $category = $data[0];
+        $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, $data) {
+            if (!($data === null )) {
+                $category = $data;
                 $category = array_keys($this->getHome()->getProvider()->getShopsArray())[$category];
                 $this->itemsForm($category, $player);
             }
@@ -67,10 +67,10 @@ class Forms
         if ($this->getHome()->getProvider()->getCategotyItems($category)) {
             if ($player instanceof Player) {
                 $money = $this->getHome()->getEconomy()->myMoney($player);
-                $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, array $data) use ($category) {
-                    if (!($data[0] === null )) {
-                        if (count($this->getHome()->getProvider()->getCategotyItems($category)) <= $data[0]) $this->mainShopForm($player);
-                        else $this->selectCountItem($category, $data[0], $player);
+                $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, $data) use ($category) {
+                    if (!($data === null )) {
+                        if (count($this->getHome()->getProvider()->getCategotyItems($category)) <= $data) $this->mainShopForm($player);
+                        else $this->selectCountItem($category, $data, $player);
                     }
                 });
                 $form->setTitle($this->getHome()->getProvider()->getMessage("itemsform.title"));
@@ -112,8 +112,8 @@ class Forms
             $string = str_replace("%damage%", $damage, $string);
             $string = str_replace("%price%", $price, $string);
             $string = str_replace("%money%", $money, $string);
-            $form = $this->getHome()->getForm()->createCustomForm(function (Player $player, array $data) use ($string_item) {
-                if (!($data[0] === null )) {
+            $form = $this->getHome()->getForm()->createCustomForm(function (Player $player, $data) use ($string_item) {
+                if (!($data === null )) {
                     $this->buyForm($player, $data, $string_item);
                 }
             });
@@ -144,11 +144,11 @@ class Forms
             $string = str_replace("%money%", $money, $string);
             $string = str_replace("%count%", $count, $string);
             $string = str_replace("%fullprice%", $fullprice, $string);
-            $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, array $data) use ($money, $fullprice, $item, $count, $itemname) {
-                if (!($data[0] === null )) {
+            $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, $data) use ($money, $fullprice, $item, $count, $itemname) {
+                if (!($data === null )) {
                     if ($fullprice > $money) $this->mainShopForm($player);
                     else {
-                        switch ($data[0]) {
+                        switch ($data) {
                             case 0:
                                 $this->getHome()->getPay()->pay($player, $fullprice, $item, $count, $itemname);
                                 break;
@@ -177,7 +177,7 @@ class Forms
     /**
      * @return Home
      */
-    function getHome(): Home
+    function getHome() : Home
     {
         return $this->home;
     }

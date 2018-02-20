@@ -60,7 +60,7 @@ class ShopCommand extends Command implements PluginIdentifiableCommand
     /**
      * @return Plugin
      */
-    function getPlugin(): Plugin
+    function getPlugin() : Plugin
     {
         return $this->home;
     }
@@ -68,7 +68,7 @@ class ShopCommand extends Command implements PluginIdentifiableCommand
     /**
      * @return Home
      */
-    function getHome(): Home
+    function getHome() : Home
     {
         return $this->home;
     }
