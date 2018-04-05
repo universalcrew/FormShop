@@ -1,57 +1,82 @@
-# ГЛАВНАЯ ФОРМА
-# MAIN FORM
+# ВЫБОР ДЕЙСТВИЯ
+# SELECTION OF ACTION
 #
 # Заголовок
 # Title
-mainform.title: "Добро пожаловать в магазин"
+selectform.title: "Добро пожаловать в магазин"
 # Контент
 # Content
-mainform.content: "Ваш баланс: %money%."
-# Кнопка
-# Button
-mainform.button: "%category_name%"
+selectform.content: "Ваш баланс: %money%."
+# Кнопки
+# Buttons
+#
+# Купить
+# Buy
+selectform.button.buy: "Купить"
+# Изображение
+# Image
+selectform.button.buy.image: "https://d30y9cdsu7xlg0.cloudfront.net/png/104301-200.png"
+# Продать
+# Sell
+selectform.button.sell: "Продать"
+# Изображение
+# Image
+selectform.button.sell.image: "https://cdn0.iconfinder.com/data/icons/shopping-set-2/512/e2-512.png"
 
-# ФОРМА С ПРЕДМЕТАМИ
-# ITEMS FORM
+# КУПИТЬ | ГЛАВНАЯ ФОРМА
+# BUY | MAIN FORM
 #
 # Заголовок
 # Title
-itemsform.title: "Добро пожаловать в магазин"
+buy.mainform.title: "Добро пожаловать в магазин"
 # Контент
 # Content
-itemsform.content: "Ваш баланс: %money%."
+buy.mainform.content: "Ваш баланс: %money%."
 # Кнопка
 # Button
-itemsform.button: "%item_name% %id%:%damage% (%price%)"
+buy.mainform.button: "%category_name%"
+
+# КУПИТЬ | ФОРМА С ПРЕДМЕТАМИ
+# BUY | ITEMS FORM
+#
+# Заголовок
+# Title
+buy.itemsform.title: "Добро пожаловать в магазин"
+# Контент
+# Content
+buy.itemsform.content: "Ваш баланс: %money%."
+# Кнопка
+# Button
+buy.itemsform.button: "%item_name% %id%:%damage% (%price%)"
 # Список предметов пуст
 # The list of items is empty
-itemsform.no_content: "Категория пуста"
+buy.itemsform.no_content: "Категория пуста"
 
-# ФОРМА С ВЫБОРОМ КОЛИЧЕСТВА ПРЕДМЕТОВ
-# SELECT COUNT ITEMS FORM
+# КУПИТЬ | ФОРМА С ВЫБОРОМ КОЛИЧЕСТВА ПРЕДМЕТОВ
+# BUY | SELECT COUNT ITEMS FORM
 #
 # Заголовок
 # Title
-selectcountform.title: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%."
+buy.selectcountform.title: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%."
 # Слайдер
 # Slider
-selectcountform.slider_name: "Выберите количество"
+buy.selectcountform.slider_name: "Выберите количество"
 
-# ФОРМА ПОКУПКИ
-# BUY FORM
+# КУПИТЬ | ФОРМА ПОКУПКИ
+# BUY | BUY FORM
 #
 # Заголовок
 # Title
-buyform.title: "Подтвердить покупку"
+buy.buyform.title: "Подтвердить покупку"
 # Контент
 # Content
-buyform.content: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%. Количество: %count%. Сумма покупки: %fullprice%"
+buy.buyform.content: "Вы желаете купить %item_name% %id%:%damage% (%price%). Ваш баланс: %money%. Количество: %count%. Сумма покупки: %fullprice%"
 # Кнопка
 # Button
-buyform.button: "Купить"
+buy.buyform.button: "Купить"
 # Недостаточно денег
 # Not enough money
-buyform.no_money: "Недостаточно денег. Вам нужно: %fullprice%"
+buy.buyform.no_money: "Недостаточно денег. Вам нужно: %fullprice%"
 
 # Полный инвентарь
 # Full inventory
@@ -65,3 +90,47 @@ mainformreturn: "Вернуться в главное меню"
 # Недостаточно прав
 # No permission
 no_permission: "Недостаточно прав"
+
+# ПРОДАТЬ | ГЛАВНАЯ ФОРМА
+# SELL | MAIN FORM
+#
+# Заголовок
+# Title
+sell.mainform.title: "Добро пожаловать в магазин"
+# Контент
+# Content
+sell.mainform.content: "Ваш баланс: %money%."
+# Кнопки для предметов
+# Buttons for objects
+sell.mainform.button: "%item_name% %id%:%damage% (%price%)"
+
+# ПРОДАТЬ | ФОРМА С ВЫБОРОМ КОЛИЧЕСТВА ПРЕДМЕТОВ
+# SELL | SELECT COUNT ITEMS FORM
+#
+# Заголовок
+# Title
+sell.selectsellform.title: "Добро пожаловать в магазин"
+# Контент
+# Content
+sell.selectsellform.content: "Ваш баланс: %money%."
+# Слайдер
+# Slider
+sell.selectsellform.slider: "Выберите количество"
+
+# ПРОДАТЬ | ФОРМА ПРОДАЖИ
+# SELL | SELL FORM
+#
+# Заголовок
+# Title
+sell.sellform.title: "Подтвердить продажу"
+# Контент
+# Content
+sell.sellform.content: "Вы желаете продать %item_name% %id%:%damage% (%price%). Ваш баланс: %money%. Количество: %count%. Сумма продажи: %fullprice%"
+# Кнопка
+# Button
+sell.sellform.button: "Продать"
+
+
+# Нет предмета
+# No item
+sell.sellform.noitem: "Этого предмета нет у вас в инвентаре."

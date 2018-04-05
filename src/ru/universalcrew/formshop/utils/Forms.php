@@ -14,6 +14,7 @@ namespace ru\universalcrew\formshop\utils;
  *
  */
 
+use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use ru\universalcrew\formshop\Home;
@@ -37,141 +38,28 @@ class Forms
     /**
      * @param Player $player
      */
-    function mainShopForm(Player $player)
+    function selectForm(Player $player) : void
     {
         $money = $this->getHome()->getEconomy()->myMoney($player);
         $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, $data) {
-            if (!($data === null )) {
-                $category = $data;
-                $category = array_keys($this->getHome()->getProvider()->getShopsArray())[$category];
-                $this->itemsForm($category, $player);
-            }
+            $buyForm = new BuyForm($this->home, $player);
+            $sellForm = new SellForm($this->home, $player);
+            if ($data === null) return;
+            if ($data === 0) $buyForm->mainBuyForm();
+            if ($data === 1) $sellForm->mainSellForm();
         });
-        $form->setTitle($this->getHome()->getProvider()->getMessage("mainform.title"));
-        $content = str_replace("%money%", $money, $this->getHome()->getProvider()->getMessage("mainform.content"));
-        $form->setContent($content);
-        $categories = $this->getHome()->getProvider()->getShopsCategories();
-        foreach ($categories as $name) {
-            $string = str_replace("%category_name%", $name, $this->getHome()->getProvider()->getMessage("mainform.button"));
-            $form->addButton($string);
-        }
+        $title = $this->getHome()->getProvider()->getMessage("selectform.title");
+        $form->setTitle($title);
+        $text = $this->getHome()->getProvider()->getMessage("selectform.content");
+        $text = str_replace("%money%", $money, $text);
+        $form->setContent($text);
+        $textButtonBuy = $this->getHome()->getProvider()->getMessage("selectform.button.buy");
+        $image = $this->getHome()->getProvider()->getMessage("selectform.button.buy.image");
+        $form->addButton($textButtonBuy, SimpleForm::IMAGE_TYPE_URL, $image);
+        $textButtonSell = $this->getHome()->getProvider()->getMessage("selectform.button.sell");
+        $image = $this->getHome()->getProvider()->getMessage("selectform.button.sell.image");
+        $form->addButton($textButtonSell, SimpleForm::IMAGE_TYPE_URL, $image);
         $form->sendToPlayer($player);
-    }
-
-    /**
-     * @param string $category
-     * @param Player $player
-     */
-    private function itemsForm(string $category, Player $player)
-    {
-        if ($this->getHome()->getProvider()->getCategotyItems($category)) {
-            if ($player instanceof Player) {
-                $money = $this->getHome()->getEconomy()->myMoney($player);
-                $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, $data) use ($category) {
-                    if (!($data === null )) {
-                        if (count($this->getHome()->getProvider()->getCategotyItems($category)) <= $data) $this->mainShopForm($player);
-                        else $this->selectCountItem($category, $data, $player);
-                    }
-                });
-                $form->setTitle($this->getHome()->getProvider()->getMessage("itemsform.title"));
-                $content = str_replace("%money%", $money, $this->getHome()->getProvider()->getMessage("itemsform.content"));
-                $form->setContent($content);
-                $items = $this->getHome()->getProvider()->getCategotyItems($category);
-                foreach ($items as $item) {
-                    list($id, $damage, $price, $itemname) = explode(":", $item);
-                    $string = $this->getHome()->getProvider()->getMessage("itemsform.button");
-                    $string = str_replace("%item_name%", $itemname, $string);
-                    $string = str_replace("%id%", $id, $string);
-                    $string = str_replace("%damage%", $damage, $string);
-                    $string = str_replace("%price%", $price, $string);
-                    $form->addButton($string);
-                }
-                $form->addButton($this->getHome()->getProvider()->getMessage("mainformreturn"));
-                $form->sendToPlayer($player);
-            }
-        } else {
-            $player->sendTip($this->getHome()->getProvider()->getMessage("itemsform.no_content"));
-            $this->mainShopForm($player);
-        }
-    }
-
-    /**
-     * @param string $category
-     * @param int $index
-     * @param Player $player
-     */
-    private function selectCountItem(string $category, int $index, Player $player)
-    {
-        if ($player instanceof Player) {
-            $money = $this->getHome()->getEconomy()->myMoney($player);
-            $string_item = $this->getHome()->getProvider()->getStringItem($category, $index);
-            list($id, $damage, $price, $itemname) = explode(":", $string_item);
-            $string = $this->getHome()->getProvider()->getMessage("selectcountform.title");
-            $string = str_replace("%item_name%", $itemname, $string);
-            $string = str_replace("%id%", $id, $string);
-            $string = str_replace("%damage%", $damage, $string);
-            $string = str_replace("%price%", $price, $string);
-            $string = str_replace("%money%", $money, $string);
-            $form = $this->getHome()->getForm()->createCustomForm(function (Player $player, $data) use ($string_item) {
-                if (!($data === null )) {
-                    $this->buyForm($player, $data, $string_item);
-                }
-            });
-            $form->setTitle($string);
-            $form->addSlider($this->getHome()->getProvider()->getMessage("selectcountform.slider_name"), 1, 64, 1, 1);
-            $form->sendToPlayer($player);
-        }
-    }
-
-    /**
-     * @param Player $player
-     * @param array $data
-     * @param string $string_item
-     */
-    private function buyForm(Player $player, array $data, string $string_item)
-    {
-        if ($player instanceof Player) {
-            $money = $this->getHome()->getEconomy()->myMoney($player);
-            list($id, $damage, $price, $itemname) = explode(":", $string_item);
-            $count = $data[0];
-            $fullprice = $count * $price;
-            $item = new Item($id, $damage);
-            $string = $this->getHome()->getProvider()->getMessage("buyform.content");
-            $string = str_replace("%item_name%", $itemname, $string);
-            $string = str_replace("%id%", $id, $string);
-            $string = str_replace("%damage%", $damage, $string);
-            $string = str_replace("%price%", $price, $string);
-            $string = str_replace("%money%", $money, $string);
-            $string = str_replace("%count%", $count, $string);
-            $string = str_replace("%fullprice%", $fullprice, $string);
-            $form = $this->getHome()->getForm()->createSimpleForm(function (Player $player, $data) use ($money, $fullprice, $item, $count, $itemname) {
-                if (!($data === null )) {
-                    if ($fullprice > $money) $this->mainShopForm($player);
-                    else {
-                        switch ($data) {
-                            case 0:
-                                $this->getHome()->getPay()->pay($player, $fullprice, $item, $count, $itemname);
-                                break;
-                            case 1:
-                                $this->mainShopForm($player);
-                                break;
-                        }
-                    }
-                }
-
-            });
-            $form->setTitle($this->getHome()->getProvider()->getMessage("buyform.title"));
-            if ($fullprice > $money) {
-                $text = $this->getHome()->getProvider()->getMessage("buyform.no_money");
-                $text = str_replace("%fullprice%", $fullprice, $text);
-                $form->setContent($text);
-            } else {
-                $form->setContent($string);
-                $form->addButton($this->getHome()->getProvider()->getMessage("buyform.button"));
-            }
-            $form->addButton($this->getHome()->getProvider()->getMessage("mainformreturn"));
-            $form->sendToPlayer($player);
-        }
     }
 
     /**

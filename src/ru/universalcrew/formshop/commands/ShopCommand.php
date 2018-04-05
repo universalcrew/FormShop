@@ -53,7 +53,7 @@ class ShopCommand extends Command implements PluginIdentifiableCommand
             $sender->sendMessage($this->getHome()->getProvider()->getMessage("no_permission"));
             return false;
         }
-        $this->getHome()->getForms()->mainShopForm($sender);
+        $this->getHome()->getForms()->selectForm($sender);
         return true;
     }
 

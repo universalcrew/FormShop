@@ -22,7 +22,7 @@ class Provider
     /**
      * @var Config
      */
-    public $shops;
+    public $buy;
 
     /**
      * @var Config
@@ -35,20 +35,29 @@ class Provider
     private $home;
 
     /**
+     * @var Config
+     */
+    private $sell;
+
+    /**
      * Provider constructor.
      * @param Home $home
      */
     function __construct(Home $home)
     {
         $this->home = $home;
-        if (!is_file($this->getHome()->getDataFolder() . 'shops.yml') &&
+        if (!is_file($this->getHome()->getDataFolder() . 'buy.yml') ||
+            !is_file($this->getHome()->getDataFolder() . 'sell.yml') ||
             !is_file($this->getHome()->getDataFolder() . 'messages.yml')) {
             @mkdir($this->getHome()->getDataFolder());
-            $this->getHome()->saveResource('shops.yml');
+            $this->getHome()->saveResource('buy.yml');
+            $this->getHome()->saveResource('sell.yml');
             $this->getHome()->saveResource('messages.yml');
         }
-        $this->shops = new Config($this->getHome()->getDataFolder() . 'shops.yml', Config::YAML, []);
-        $this->shops->reload();
+        $this->buy = new Config($this->getHome()->getDataFolder() . 'buy.yml', Config::YAML, []);
+        $this->buy->reload();
+        $this->sell = new Config($this->getHome()->getDataFolder() . 'sell.yml', Config::YAML, []);
+        $this->sell->reload();
         $this->messages = new Config($this->getHome()->getDataFolder() . 'messages.yml', Config::YAML, []);
         $this->messages->reload();
     }
@@ -63,27 +72,46 @@ class Provider
     }
 
     /**
-     * @return array
+     * @return Config
      */
-    function getMessages() : array
+    function getBuy() : Config
     {
-        return $this->messages->getAll();
+        return $this->buy;
     }
 
     /**
      * @return Config
      */
-    function getShops() : Config
+    function getSell() : Config
     {
-        return $this->shops;
+        return $this->sell;
     }
 
     /**
      * @return array
      */
-    function getShopsArray() : array
+    function getShops() : array
     {
-        return $this->shops->getAll();
+        return $this->getBuy()->getAll();
+    }
+
+    /**
+     * @param string $name
+     * @return array
+     */
+    function getCategory(string $name) : array
+    {
+        return $this->getShops()[$name];
+    }
+
+    /**
+     * @param int $index
+     * @return array
+     */
+    function getCategoryIndex(int $index) : array
+    {
+        $category = array_keys($this->getShops())[$index];
+        return $this->getShops()[$category];
     }
 
     /**
@@ -91,30 +119,37 @@ class Provider
      */
     function getShopsCategories() : array
     {
-        $all = $this->getShops()->getAll();
+        $all = $this->getShops();
         $categories = [];
         foreach ($all as $category => $items) $categories[$category] = $items["name"];
         return $categories;
     }
 
-
     /**
      * @param string $category
-     * @return bool
+     * @return string
      */
-    function isCategotyItems(string $category) : bool
+    function getImageCategory(string $category) : string
     {
-        return isset($this->getShops()->getAll()[$category]["items"]);
+        return $this->getCategory($category)["image"];
     }
 
     /**
-     * @param string $category
+     * @param int $category
+     * @return bool
+     */
+    function isCategoryItems(int $category) : bool
+    {
+        return isset($this->getCategoryIndex($category)["items"]);
+    }
+
+    /**
+     * @param int $category
      * @return array
      */
-    function getCategotyItems(string $category) : array
+    function getCategoryItems(int $category) : array
     {
-        if ($this->isCategotyItems($category)) return $this->getShops()->getAll()[$category]["items"];
-        else return [];
+        return $this->getCategoryIndex($category)["items"];
     }
 
     /**
@@ -124,7 +159,24 @@ class Provider
      */
     function getStringItem(string $category, int $index) : string
     {
-        return $this->getCategotyItems($category)[$index];
+        return $this->getCategoryItems($category)[$index];
+    }
+
+    /**
+     * @return array
+     */
+    function getSellItems() : array
+    {
+        return $this->getSell()->getAll()["items"];
+    }
+
+    /**
+     * @param int $index
+     * @return string
+     */
+    function getSellItem(int $index) : string
+    {
+        return $this->getSell()->getAll()["items"][$index];
     }
 
     /**

@@ -1,0 +1,7 @@
+items:
+  #ID-Damage-<цена за штуку>-<название>-<ссылка на картинку>
+  #ID-Damage-<price for one>-<name>-<image url>
+  - "45-0-30-Кирпич-https://d1u5p3l4wpay3k.cloudfront.net/minecraft_gamepedia/f/ff/Bricks.png"
+  - "45-0-30-Brick-https://d1u5p3l4wpay3k.cloudfront.net/minecraft_gamepedia/f/ff/Bricks.png"
+  - "280-0-5-Палка-https://d1u5p3l4wpay3k.cloudfront.net/minecraft_gamepedia/a/aa/Stick.png"
+  - "280-0-5-Stick-https://d1u5p3l4wpay3k.cloudfront.net/minecraft_gamepedia/a/aa/Stick.png"

@@ -21,6 +21,7 @@ use ru\universalcrew\formshop\commands\ShopCommand;
 use ru\universalcrew\formshop\utils\Forms;
 use ru\universalcrew\formshop\utils\Pay;
 use ru\universalcrew\formshop\utils\Provider;
+use ru\universalcrew\formshop\utils\Sell;
 
 class Home extends PluginBase
 {
@@ -49,7 +50,12 @@ class Home extends PluginBase
      */
     private $forms;
 
-    function onEnable()
+    /**
+     * @var Sell
+     */
+    private $sell;
+
+    function onEnable() : void
     {
         $this->getLogger()->info($this->getDescription()->getName() . " включен.");
         $this->loadPlugins();
@@ -57,14 +63,15 @@ class Home extends PluginBase
         $this->initCommands();
     }
 
-    private function loadClass()
+    private function loadClass() : void
     {
         $this->provider = new Provider($this);
         $this->pay = new Pay($this);
         $this->forms = new Forms($this);
+        $this->sell = new Sell($this);
     }
 
-    private function loadPlugins()
+    private function loadPlugins() : void
     {
         if ($this->getServer()->getPluginManager()->getPlugin("EconomyAPI") === null ||
             $this->getServer()->getPluginManager()->getPlugin("FormAPI") === null) {
@@ -76,7 +83,7 @@ class Home extends PluginBase
         }
     }
 
-    private function initCommands()
+    private function initCommands() : void
     {
         $list = [
             new ShopCommand($this)
@@ -125,6 +132,15 @@ class Home extends PluginBase
     }
 
     /**
+     * @return Sell
+     */
+    function getSell() : Sell
+    {
+        return $this->sell;
+    }
+
+
+    /**
      * @return Forms
      */
     function getForms() : Forms
@@ -132,7 +148,7 @@ class Home extends PluginBase
         return $this->forms;
     }
 
-    function onDisable()
+    function onDisable() : void
     {
         $this->getLogger()->info($this->getDescription()->getName() . " выключен.");
     }

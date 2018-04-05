@@ -51,7 +51,7 @@ class Pay
      * @param int $count
      * @param string $itemname
      */
-    public function pay(Player $player, int $fullprice, Item $item, int $count, string $itemname)
+    public function pay(Player $player, int $fullprice, Item $item, int $count, string $itemname) : void
     {
         if ($player->getInventory()->canAddItem($item)) {
             $this->getHome()->getEconomy()->reduceMoney($player, $fullprice);

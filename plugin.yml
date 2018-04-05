@@ -1,6 +1,6 @@
 name: FormShop
 main: ru\universalcrew\formshop\Home
-version: 1.0.3
+version: 1.1
 api:
 - 3.0.0-ALPHA11
 author: egr7v8
